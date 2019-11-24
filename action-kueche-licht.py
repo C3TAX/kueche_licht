@@ -34,7 +34,7 @@ def msg_kueche_tisch_licht_an(hermes, intentMessage):
     ws.close()
     
     if len(intentMessage.slots.kueche_tisch_licht_an) > 0:
-        kueche_tisch_licht_an = intentMessage.kueche_tisch_licht_an.first().value # We extract the value from the slot "house_room"
+        house_room = intentMessage.kueche_tisch_licht_an.first().value # We extract the value from the slot "house_room"
         result_sentence = "Tisch Licht in {} angeschaltet".format(str(kueche_tisch_licht_an))  # The response that will be said out loud by the TTS engine.
     else:
         result_sentence = "Kuechen Tisch Licht an"
@@ -51,7 +51,7 @@ def msg_kueche_tisch_licht_aus(hermes, intentMessage):
     ws.close()
 
     if len(intentMessage.slots.kueche_tisch_licht_aus) > 0:
-        kueche_tisch_licht_aus = intentMessage.slots.kueche_tisch_licht_aus.first().value # We extract the value from the slot "house_room"
+        house_room = intentMessage.slots.kueche_tisch_licht_aus.first().value # We extract the value from the slot "house_room"
         result_sentence = "Tisch Licht in {} ausgeschaltet".format(str(kueche_tisch_licht_aus))  # The response that will be said out loud by the TTS engine.
     else:
         result_sentence = "Kuechen Tisch Licht aus"
