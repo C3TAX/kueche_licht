@@ -76,7 +76,34 @@ def msg_kueche_block_licht_aus(hermes, intentMessage):
 
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
+
     
+def msg_kueche_decke_licht_an(hermes, intentMessage):
+    conf = read_configuration_file(CONFIG_INI)
+    
+    ws = create_connection("ws://192.168.178.102:8080")
+    ws.send("Update GA:00_0_006=1")
+    ws.close()
+    
+    result_sentence = "Decken Licht an"
+
+    current_session_id = intentMessage.session_id
+    hermes.publish_end_session(current_session_id, result_sentence)
+    
+    
+def msg_kueche_decke_licht_aus(hermes, intentMessage):
+    conf = read_configuration_file(CONFIG_INI)
+    
+    ws = create_connection("ws://192.168.178.102:8080")
+    ws.send("Update GA:00_0_006=0")
+    ws.close()
+    
+    result_sentence = "Dicken Licht aus"
+
+    current_session_id = intentMessage.session_id
+    hermes.publish_end_session(current_session_id, result_sentence)
+
+
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
@@ -84,4 +111,6 @@ if __name__ == "__main__":
         h.subscribe_intent("cetax:kueche_tisch_licht_aus", msg_kueche_tisch_licht_aus)
         h.subscribe_intent("cetax:kueche_block_licht_an", msg_kueche_block_licht_an)
         h.subscribe_intent("cetax:kueche_block_licht_aus", msg_kueche_block_licht_aus)
+        h.subscribe_intent("cetax:kueche_decke_licht_an", msg_kueche_decke_licht_an)
+        h.subscribe_intent("cetax:kueche_decke_licht_aus", msg_kueche_decke_licht_aus)
         h.start()
