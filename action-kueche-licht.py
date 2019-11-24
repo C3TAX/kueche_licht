@@ -62,6 +62,6 @@ def msg_kueche_tisch_licht_aus(hermes, intentMessage):
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
-        h.subscribe_intent("cetax:Tisch_Licht_an", msg_kueche_tisch_licht_an)
-        h.subscribe_intent("cetax:Tisch_Licht_aus", msg_kueche_tisch_licht_aus)
+        h.subscribe_intent("cetax:kueche_tisch_licht_an", msg_kueche_tisch_licht_an)
+        h.subscribe_intent("cetax:kueche_tisch_licht_aus", msg_kueche_tisch_licht_aus)
         h.start()
