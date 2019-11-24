@@ -33,11 +33,7 @@ def msg_kueche_tisch_licht_an(hermes, intentMessage):
     ws.send("Update GA:00_0_005=1")
     ws.close()
     
-    if len(intentMessage.slots.kueche) > 0:
-        house_room = intentMessage.kueche.first().value # We extract the value from the slot "house_room"
-        result_sentence = "Tisch Licht in {} angeschaltet".format(str(kueche))  # The response that will be said out loud by the TTS engine.
-    else:
-        result_sentence = "Kuechen Tisch Licht an"
+    result_sentence = "Kuechen Tisch Licht an"
 
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
@@ -50,11 +46,7 @@ def msg_kueche_tisch_licht_aus(hermes, intentMessage):
     ws.send("Update GA:00_0_005=0")
     ws.close()
 
-    if len(intentMessage.slots.kueche) > 0:
-        house_room = intentMessage.slots.kueche.first().value # We extract the value from the slot "house_room"
-        result_sentence = "Tisch Licht in {} ausgeschaltet".format(str(kueche))  # The response that will be said out loud by the TTS engine.
-    else:
-        result_sentence = "Kuechen Tisch Licht aus"
+    result_sentence = "Kuechen Tisch Licht aus"
 
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
