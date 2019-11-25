@@ -117,10 +117,11 @@ def msg_kueche_licht_an(hermes, intentMessage):
     hermes.publish_end_session(current_session_id, result_sentence)
 
     
-def msg_kueche_licht_aaus(hermes, intentMessage):
+def msg_kueche_licht_aus(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
     
     ws = create_connection("ws://192.168.178.102:8080")
+    ws.send("Update GA:00_0_005=0")
     ws.send("Update GA:00_0_006=0")
     ws.send("Update GA:00_0_007=0")
     ws.close()
@@ -129,9 +130,8 @@ def msg_kueche_licht_aaus(hermes, intentMessage):
 
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
-    
-    
-    
+
+
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
