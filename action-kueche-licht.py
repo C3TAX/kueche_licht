@@ -25,7 +25,8 @@ def read_configuration_file(configuration_file):
             return conf_parser.to_dict()
     except (IOError, configparser.Error) as e:
         return dict()
-        
+
+
 def msg_kueche_tisch_licht_an(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
     
@@ -102,6 +103,7 @@ def msg_kueche_decke_licht_aus(hermes, intentMessage):
 
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
+
 
 def msg_kueche_licht_an(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
